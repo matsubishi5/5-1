@@ -1,0 +1,36 @@
+<table class="table">
+		<tr><%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></tr>
+
+		<tr>
+			<th>name</th>
+			<th><%= user.name %></th>
+		</tr>
+
+		<tr>
+			<th>introduction</th>
+			<th><%= user.introduction %></th>
+		</tr>
+
+		<tr>
+			<th>follows</th>
+			<th><%= link_to "#{user.follower.count}", users_following_path(user) %></th>
+		</tr>
+
+		<tr>
+			<th>followers</th>
+			<th><%= link_to "#{user.followed.count}", users_follower_path(user) %></th>
+		</tr>
+
+        <tr>
+            <th class="followbutton_<%= user.id %>">
+                <% unless user == current_user %>
+                    <%= render "followbutton", user: user %>
+                <% end %>
+            </th>
+            <th></th>
+		</tr>
+</table>
+
+<div class="row">
+	<%= link_to '',edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
+</div>

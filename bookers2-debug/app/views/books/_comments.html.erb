@@ -1,0 +1,8 @@
+<td><%= comment.body %></td>
+<td><%= comment.user.name %></td>
+
+<td>
+    <% if comment.user == current_user %>
+    <%= link_to "Destroy", book_comment_path(comment), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %>
+    <% end %>
+</td>

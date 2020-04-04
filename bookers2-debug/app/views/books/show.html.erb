@@ -1,0 +1,52 @@
+
+<div class="row">
+	<div class="col-xs-3">
+
+		<h2>User info</h2>
+		<%= render 'users/profile', user: current_user %>
+
+		<h2>New book</h2>
+		<%= render 'books/newform', book: @book %>
+
+	</div>
+
+	<div class="col-xs-9">
+		<h2>Book detail</h2>
+
+		<table class="table">
+            <tr>
+                <td class="books_<%= @book.id %>">
+                    <%= render 'books', book: @book %>
+                </td>
+                <% if @book.user == current_user %>
+                    <td><%= link_to "Edit",edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
+                    <td><%= link_to "Destroy",@book, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book.id}" %></td>
+                <% end %>
+            </tr>
+        </table>
+
+        <%= form_for [@book, @comment] do |f| %>
+            <%= f.text_area :body, size: "120x10" %>
+            <%= f.submit "送信" %>
+        <% end %>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>comment</th>
+                    <th>name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="new_comment"></tr>
+                <% @comments.each do |comment| %>
+                    <tr class="comments_<%= comment.id %>">
+                        <%= render 'comments', comment: comment %>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+	</div>
+</div>
+

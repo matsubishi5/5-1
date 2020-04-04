@@ -1,0 +1,33 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-2"></div>
+		<div class="col-xs-8">
+			<h3>フォロー中</h3>
+			<table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Introduction</th>
+                        <th></th>
+                    </tr>
+                </thead>
+				<tbody>
+					<% @user.following_user.where.not(id: current_user.id).each do |user| %>
+                        <tr>
+                            <%= link_to user_path(user) do %>
+                                <td><%= attachment_image_tag user, :profile_image, :size =>'30x30', class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg" %></td>
+                                <td><%= user.name %></td>
+                                <td><%= user.introduction %></td>
+                            <% end %>
+                            <td class="followbutton_<%= user.id %>">
+                                <%= render "followbutton", user: user %>
+                            </td>
+                        </tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+        <div class="col-xs-2"></div>
+	</div>
+</div>

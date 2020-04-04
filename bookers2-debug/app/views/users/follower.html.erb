@@ -1,0 +1,26 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-2"></div>
+		<div class="col-xs-8">
+			<h3>フォロー中</h3>
+			<table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Introduction</th>
+                        <th></th>
+                    </tr>
+                </thead>
+				<tbody>
+					<% @user.follower_user.where.not(id: current_user.id).each do |user| %>
+						<tr class="followbutton_<%= user.id %>">
+	                		<%= render "follow", user: user %>
+	                	</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+        <div class="col-xs-2"></div>
+	</div>
+</div>
